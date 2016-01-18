@@ -2,7 +2,7 @@ package studentmanage.DButils;
 
 import java.sql.*;
 
-public class MySqlDButil extends ADButil{
+public class MySqlDButil extends ADButil {
 	private String Driver = "com.mysql.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/studentdb?characterEncoding=utf8";
 	// 数据库连接，oracle代表链接的是oracle数据库；thin:@MyDbComputerNameOrIP代表的是数据库所在的IP地址（可以保留thin:）；1521代表链接数据库的端口号；ORCL代表的是数据库名称
@@ -21,7 +21,7 @@ public class MySqlDButil extends ADButil{
 		}
 		return _con;
 	}
-	
+
 	/**
 	 * 执行查询语句
 	 * */
@@ -50,7 +50,7 @@ public class MySqlDButil extends ADButil{
 		try {
 			Connection con = getConnection();
 			Statement st = con.createStatement();
-			return st.execute(sql);
+			return st.executeUpdate(sql) > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
