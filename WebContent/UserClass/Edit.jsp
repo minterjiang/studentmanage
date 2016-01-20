@@ -10,14 +10,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>班级编辑</title>
-<link href="../Style/StudentStyle.css" rel="stylesheet" type="text/css" />
-<link href="../Script/jBox/Skins/Blue/jbox.css" rel="stylesheet"
+<link href="<%=basePath %>/Style/StudentStyle.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath %>/Script/jBox/Skins/Blue/jbox.css" rel="stylesheet"
 	type="text/css" />
-<link href="../Style/ks.css" rel="stylesheet" type="text/css" />
-<script src="../Script/jBox/jquery-1.4.2.min.js" type="text/javascript"></script>
-<script src="../Script/jBox/jquery.jBox-2.3.min.js"
+<link href="<%=basePath %>/Style/ks.css" rel="stylesheet" type="text/css" />
+<script src="<%=basePath %>/Script/jBox/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="<%=basePath %>/Script/jBox/jquery.jBox-2.3.min.js"
 	type="text/javascript"></script>
-<script src="../Script/jBox/i18n/jquery.jBox-zh-CN.js"
+<script src="<%=basePath %>/Script/jBox/i18n/jquery.jBox-zh-CN.js"
 	type="text/javascript"></script>
 <base href="<%=basePath%>">
 <script type="text/javascript">
@@ -63,8 +63,8 @@
 							</tr>
 							<tr>
 								<td align="right"></td>
-								<td colspan="5"><input type="button" class="input2" onclick="onSave();"
-									value="确认添加" /></td>
+								<td colspan="5"><input type="button" class="input2"
+									onclick="onSave();" value="确认添加" /></td>
 							</tr>
 						</table>
 					</form>

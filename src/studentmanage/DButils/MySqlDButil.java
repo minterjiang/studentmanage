@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class MySqlDButil extends ADButil {
 	private String Driver = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost/studentdb?characterEncoding=utf8";
+	private String url = "jdbc:mysql://localhost/studentdb?characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull";
 	// 数据库连接，oracle代表链接的是oracle数据库；thin:@MyDbComputerNameOrIP代表的是数据库所在的IP地址（可以保留thin:）；1521代表链接数据库的端口号；ORCL代表的是数据库名称
 	private String UserName = "root";
 	private String Password = "";// 密码

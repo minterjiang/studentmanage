@@ -5,16 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 import studentmanage.DButils.ADButil;
 import studentmanage.DButils.MySqlDButil;
 import studentmanage.models.UserClassInfo;
+import studentmanage.servlet.UserClassEditServlet;
 
 /**
  * 班级dao
  */
 public class UserClassDao {
 	private ADButil db = new MySqlDButil();
-
+	private Logger logger = Logger.getLogger(UserClassEditServlet.class.getClass());
 	/**
 	 * 获取班级
 	 */
@@ -101,7 +104,7 @@ public class UserClassDao {
 					info.setName(rs.getString("Name"));
 					info.setTeacher(rs.getString("Teacher"));
 					info.setPhone(rs.getString("Phone"));
-					info.setCreatetime(rs.getDate("CreaeDate"));
+					info.setCreatetime(rs.getDate("CreateDate"));
 					lst.add(info);
 				}
 			}
@@ -109,6 +112,7 @@ public class UserClassDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.info("数组长度为："+lst.size());
 		return lst;
 	}
 
