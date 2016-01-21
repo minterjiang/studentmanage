@@ -46,9 +46,10 @@
 								<tr align="center">
 									<td>${o.id }</td>
 									<td>${o.name}</td>
-									<td>0</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
+									<td>${o.teacher}</td>
+									<td>${o.phone}</td>
+									<td>${o.createtime}</td>
+									<td><a href="#">删除</a>&nbsp;<a href="#">编辑</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

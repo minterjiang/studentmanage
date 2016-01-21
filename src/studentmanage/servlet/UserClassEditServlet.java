@@ -48,9 +48,9 @@ public class UserClassEditServlet extends HttpServlet {
 		String name = request.getParameter("txtName");
 		String teacher = request.getParameter("txtTeacher");
 		String phone = request.getParameter("txtPhone");
-		name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
-		teacher = new String(teacher.getBytes("ISO-8859-1"), "UTF-8");
-		phone = new String(phone.getBytes("ISO-8859-1"), "UTF-8");
+		// name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
+		// teacher = new String(teacher.getBytes("ISO-8859-1"), "UTF-8");
+		// phone = new String(phone.getBytes("ISO-8859-1"), "UTF-8");
 		boolean Successed = dao.addUserClassInfo(name, teacher, phone);
 		logger.info(String.format("name= %s , teacher= %s , phone = %s", name, teacher, phone));
 		request.setAttribute("message", Successed);

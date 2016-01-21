@@ -64,7 +64,19 @@
 							<tr>
 								<td align="right"></td>
 								<td colspan="5"><input type="button" class="input2"
-									onclick="onSave();" value="确认添加" /></td>
+									onclick="onSave();" value="确认添加" />
+									<% if(request.getAttribute("message")!=null){
+										boolean ret= Boolean.parseBoolean(request.getAttribute("message").toString());
+										if(ret)
+										{%>
+											 <script type="text/javascript">jBox.tip('添加成功！');</script>
+										<%}
+										else
+										{%>											
+											<script type="text/javascript">jBox.tip('添加错误！');</script>
+										<%}
+									} %>
+									</td>
 							</tr>
 						</table>
 					</form>
