@@ -27,7 +27,7 @@
 	</div>
 	<div class="cdlist">
 		<div>
-			<a href="UserClass/Edit.jsp">新增班级</a>
+			<a href="EditUserClass">新增班级</a>
 		</div>
 		<div>
 			<a href="UserClassManageServlet">班级管理</a>

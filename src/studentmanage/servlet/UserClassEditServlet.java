@@ -1,14 +1,17 @@
 package studentmanage.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import studentmanage.Dao.UserClassDao;
 import org.apache.log4j.Logger;
+
+import studentmanage.Dao.UserClassDao;
+import studentmanage.models.UserClassInfo;
 
 /**
  * Servlet implementation class UserClassEditServlet
@@ -33,7 +36,21 @@ public class UserClassEditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		String editId = request.getParameter("editId");
+		UserClassDao dao = new UserClassDao();
+		int id=0;
+		if (editId != null && !editId.isEmpty()) {
+			id = Integer.parseInt(editId);
+		}
+		if (id > 0) {
+			UserClassInfo info = dao.getUserClass(id);
+			request.setAttribute("info", info);
+		}
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		// request.setAttribute("message", Successed);
+		request.getRequestDispatcher("/UserClass/Edit.jsp").forward(request, response);
+		// doPost(request, response);
 	}
 
 	/**
@@ -42,17 +59,33 @@ public class UserClassEditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		request.setCharacterEncoding("utf-8");
+		String editId = request.getParameter("editId");
 		UserClassDao dao = new UserClassDao();
+		boolean Successed = false;
 		String name = request.getParameter("txtName");
 		String teacher = request.getParameter("txtTeacher");
 		String phone = request.getParameter("txtPhone");
-		// name = new String(name.getBytes("ISO-8859-1"), "UTF-8");
-		// teacher = new String(teacher.getBytes("ISO-8859-1"), "UTF-8");
-		// phone = new String(phone.getBytes("ISO-8859-1"), "UTF-8");
-		boolean Successed = dao.addUserClassInfo(name, teacher, phone);
-		logger.info(String.format("name= %s , teacher= %s , phone = %s", name, teacher, phone));
+
+		int id = 0;
+
+		if (editId != null && !editId.isEmpty()) {
+			id = Integer.parseInt(editId);
+		}
+
+		if (id > 0) {// ÐÞ¸Ä
+			UserClassInfo info = dao.getUserClass(id);
+			if (info != null) {
+				info.setName(name);
+				info.setTeacher(teacher);
+				info.setPhone(phone);
+				Successed = dao.updateUserClassInfo(info);
+			}
+		} else
+		{// ÐÂÔö
+
+			Successed = dao.addUserClassInfo(name, teacher, phone);
+			logger.info(String.format("name= %s , teacher= %s , phone = %s", name, teacher, phone));
+		}
 		request.setAttribute("message", Successed);
 		request.getRequestDispatcher("/UserClass/Edit.jsp").forward(request, response);
 	}

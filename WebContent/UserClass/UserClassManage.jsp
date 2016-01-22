@@ -49,11 +49,30 @@
 									<td>${o.teacher}</td>
 									<td>${o.phone}</td>
 									<td>${o.createtime}</td>
-									<td><a href="#">删除</a>&nbsp;<a href="#">编辑</a></td>
+									<td><a href="UserClassManage?delId=${o.id}">删除</a>&nbsp;<a
+										href="EditUserClass?editId=${o.id}">编辑</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					<%
+						if (request.getAttribute("message") != null) {
+							boolean ret = Boolean.parseBoolean(request.getAttribute("message").toString());
+							if (ret) {
+					%>
+					<script type="text/javascript">
+						jBox.tip('刪除成功！');
+					</script>
+					<%
+						} else {
+					%>
+					<script type="text/javascript">
+						jBox.tip('刪除發生錯誤！');
+					</script>
+					<%
+						}
+						}
+					%>
 				</div>
 			</div>
 		</div>

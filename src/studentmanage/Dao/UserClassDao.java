@@ -18,28 +18,7 @@ import studentmanage.servlet.UserClassEditServlet;
 public class UserClassDao {
 	private ADButil db = new MySqlDButil();
 	private Logger logger = Logger.getLogger(UserClassEditServlet.class.getClass());
-	/**
-	 * 获取班级
-	 */
-	public UserClassInfo getUserClassInfo(int id) {
-		String sql = String.format(" SELECT * FROM USERCLASS where id=%s", id);
-		ResultSet rs = db.query(sql);
-		UserClassInfo info = new UserClassInfo();
-		try {
-			if (rs != null) {
-				while (rs.next()) {
-					info.setId(rs.getInt("Id"));
-					info.setName(rs.getString("Name"));
-					info.setCreatetime(rs.getDate("CreaeDate"));
-				}
-			}
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return info;
-	}
-
+ 
 	/**
 	 * 新增
 	 * 
@@ -81,9 +60,26 @@ public class UserClassDao {
 	 * @return
 	 */
 	public boolean updateUserClassInfo(UserClassInfo userClass) {
-		String sql = String.format("update userClass set Name='$s',Teacher='$s',Phone='$s' where Id=%s",
+		String sql = String.format("update userClass set Name='%s',Teacher='%s',Phone='%s' where Id=%s",
 				userClass.getName(), userClass.getTeacher(), userClass.getPhone(), userClass.getId());
+		
 		return db.execute(sql);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param 主鍵
+	 * @return
+	 */
+	public boolean deleteUserClassInfo(int id) {
+		try {
+			String sql = String.format("DELETE from userClass where Id=%s", id);
+			return db.execute(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
@@ -112,7 +108,7 @@ public class UserClassDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("数组长度为："+lst.size());
+		logger.info("数组长度为：" + lst.size());
 		return lst;
 	}
 

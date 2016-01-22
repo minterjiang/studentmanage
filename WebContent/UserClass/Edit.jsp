@@ -39,6 +39,7 @@
 </script>
 </head>
 <body>
+  
 	<jsp:include page="../Header.jsp"></jsp:include>
 	<div class="page">
 		<div class="box mtop">
@@ -47,19 +48,19 @@
 			</div>
 			<div class="rightbox">
 				<div class="cztable">
-					<form id="formEditClass" action="EditUserClass" method="post">
+					<form id="formEditClass" action="EditUserClass?editId=${info.id}" method="post">
 						<table border="0" cellspacing="0" cellpadding="0" width="100%">
 							<tr>
 								<td width="91" align="right">班级名称：</td>
-								<td colspan="5"><input type="text" name="txtName" /></td>
+								<td colspan="5"><input type="text" name="txtName" value="${info.name}" /></td>
 							</tr>
 							<tr>
 								<td align="right">班主任：</td>
-								<td colspan="5"><input type="text" name="txtTeacher" /></td>
+								<td colspan="5"><input type="text" name="txtTeacher" value="${info.teacher}" /></td>
 							</tr>
 							<tr>
 								<td align="right">联系方式：</td>
-								<td colspan="5"><input type="text" name="txtPhone" /></td>
+								<td colspan="5"><input type="text" name="txtPhone"  value="${info.phone}"/></td>
 							</tr>
 							<tr>
 								<td align="right"></td>
@@ -69,11 +70,15 @@
 										boolean ret= Boolean.parseBoolean(request.getAttribute("message").toString());
 										if(ret)
 										{%>
-											 <script type="text/javascript">jBox.tip('添加成功！');</script>
+											 <script type="text/javascript">jBox.tip('操作成功！','loading');
+											 window.setTimeout(function () { location.href="UserClassManageServlet"; }, 2000);											 
+											 </script>
 										<%}
 										else
 										{%>											
-											<script type="text/javascript">jBox.tip('添加错误！');</script>
+											<script type="text/javascript">jBox.tip('操作失敗！','loading');
+											window.setTimeout(function () { location.href="UserClassManageServlet"; }, 2000);
+											</script>
 										<%}
 									} %>
 									</td>

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import studentmanage.Dao.UserClassDao;
 
 /**
@@ -15,6 +17,7 @@ import studentmanage.Dao.UserClassDao;
 @WebServlet("/UserClassManageServlet")
 public class UserClassManageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Logger logger = Logger.getLogger(UserClassEditServlet.class.getClass());
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -31,13 +34,21 @@ public class UserClassManageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html;charset=utf-8");
-		request.setCharacterEncoding("utf-8");
-		UserClassDao dao = new UserClassDao();
-		
-		request.setAttribute("oList", dao.getUserClassList());
-		
-		request.getRequestDispatcher("/UserClass/UserClassManage.jsp").forward(request, response);
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			request.setCharacterEncoding("utf-8");
+			UserClassDao dao = new UserClassDao();
+			if (request.getParameter("delId") != null) {
+				int id = Integer.parseInt(request.getParameter("delId"));
+				boolean Successed = dao.deleteUserClassInfo(id);
+				request.setAttribute("message", Successed);
+			}
+			request.setAttribute("oList", dao.getUserClassList());
+			request.getRequestDispatcher("/UserClass/UserClassManage.jsp").forward(request, response);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	/**
