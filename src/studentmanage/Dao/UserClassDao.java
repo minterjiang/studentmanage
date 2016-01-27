@@ -18,7 +18,7 @@ import studentmanage.servlet.UserClassEditServlet;
 public class UserClassDao {
 	private ADButil db = new MySqlDButil();
 	private Logger logger = Logger.getLogger(UserClassEditServlet.class.getClass());
- 
+
 	/**
 	 * 新增
 	 * 
@@ -62,7 +62,7 @@ public class UserClassDao {
 	public boolean updateUserClassInfo(UserClassInfo userClass) {
 		String sql = String.format("update userClass set Name='%s',Teacher='%s',Phone='%s' where Id=%s",
 				userClass.getName(), userClass.getTeacher(), userClass.getPhone(), userClass.getId());
-		
+
 		return db.execute(sql);
 	}
 
@@ -110,6 +110,59 @@ public class UserClassDao {
 		}
 		logger.info("数组长度为：" + lst.size());
 		return lst;
+	}
+
+	/**
+	 * 返回所有
+	 * 
+	 * @return
+	 */
+	public ArrayList<UserClassInfo> getUserClassList(int pageIndex, int pageSize) {
+		String sql = String.format(
+				sql = "select * from USERCLASS where Id limit " + ((pageIndex - 1) * pageSize) + "," + pageSize);
+		ResultSet rs = db.query(sql);
+		ArrayList<UserClassInfo> lst = new ArrayList<UserClassInfo>();
+
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					UserClassInfo info = new UserClassInfo();
+					info.setId(rs.getInt("Id"));
+					info.setName(rs.getString("Name"));
+					info.setTeacher(rs.getString("Teacher"));
+					info.setPhone(rs.getString("Phone"));
+					info.setCreatetime(rs.getDate("CreateDate"));
+					lst.add(info);
+				}
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		logger.info("数组长度为：" + lst.size());
+		return lst;
+	}
+
+	/**
+	 * 获取总条数
+	 */	 
+	public int getUserClassListCount() {
+		String sql = String.format(sql = "SELECT count(1)as Count FROM USERCLASS");
+		ResultSet rs = db.query(sql);
+		int count = 0;
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+					count = rs.getInt("Count");
+					break;
+				}
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return count;
 	}
 
 	/**

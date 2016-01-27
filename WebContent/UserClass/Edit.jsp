@@ -39,8 +39,7 @@
 </script>
 </head>
 <body>
-  
-	<jsp:include page="../Header.jsp"></jsp:include>
+  <jsp:include page="../Header.jsp"></jsp:include>
 	<div class="page">
 		<div class="box mtop">
 			<div class="leftbox">

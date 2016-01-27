@@ -1,6 +1,7 @@
 package studentmanage.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import studentmanage.Common.PageModel;
 import studentmanage.Dao.UserClassDao;
 
 /**
@@ -35,6 +37,10 @@ public class UserClassManageServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+			int pageIndex = 1;
+			if (request.getParameter("p") != null) {
+				pageIndex = Integer.parseInt(request.getParameter("p"));
+			}
 			response.setContentType("text/html;charset=utf-8");
 			request.setCharacterEncoding("utf-8");
 			UserClassDao dao = new UserClassDao();
@@ -43,7 +49,11 @@ public class UserClassManageServlet extends HttpServlet {
 				boolean Successed = dao.deleteUserClassInfo(id);
 				request.setAttribute("message", Successed);
 			}
-			request.setAttribute("oList", dao.getUserClassList());
+			int pageSize=10;
+			int total=dao.getUserClassListCount();
+			PageModel p=new PageModel(pageIndex,total,"UserClassManageServlet",pageSize);
+			request.setAttribute("Pager", p.GetPager());			
+			request.setAttribute("oList", dao.getUserClassList(pageIndex, pageSize));
 			request.getRequestDispatcher("/UserClass/UserClassManage.jsp").forward(request, response);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
