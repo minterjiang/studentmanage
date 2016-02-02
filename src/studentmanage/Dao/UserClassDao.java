@@ -107,8 +107,7 @@ public class UserClassDao {
 			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		logger.info("数组长度为：" + lst.size());
+		}	 
 		return lst;
 	}
 

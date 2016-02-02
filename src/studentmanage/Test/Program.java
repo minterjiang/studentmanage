@@ -6,7 +6,6 @@ public class Program {
 	private static Logger logger1 = Logger.getLogger(Program.class);
 
 	public static void main(String[] agrs) {
-
-		logger1.info(String.format("xxxxxxxxxxxxxxxxxxx"));
+ 
 	}
 }

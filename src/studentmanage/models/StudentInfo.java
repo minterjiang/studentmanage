@@ -54,5 +54,34 @@ public class StudentInfo {
 	private Date createtime;
 	private int type;
 	
+	private String classname;
+	public String getClassname() {
+		return classname;
+	}
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+	
+	private float chinese;
+	public float getChinese() {
+		return chinese;
+	}
+	public void setChinese(float chinese) {
+		this.chinese = chinese;
+	}
+	public float getEnglish() {
+		return english;
+	}
+	public void setEnglish(float english) {
+		this.english = english;
+	}
+	public float getMaths() {
+		return maths;
+	}
+	public void setMaths(float maths) {
+		this.maths = maths;
+	}
+	private float english;
+	private float maths;
 	
 }
