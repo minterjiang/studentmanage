@@ -42,12 +42,12 @@ public class StudentDao {
 
 	/**
 	 * 获取所有学生的条数
+	 * 
 	 * @param userClass
 	 * @return
 	 */
-	public int getStudentsListCount()
-	{
-		
+	public int getStudentsListCount() {
+
 		String sql = String.format(sql = "SELECT count(1)as Count FROM students");
 		ResultSet rs = db.query(sql);
 		int count = 0;
@@ -65,8 +65,7 @@ public class StudentDao {
 
 		return count;
 	}
-	
-	
+
 	/**
 	 * 修改密码
 	 * 
@@ -129,7 +128,7 @@ public class StudentDao {
 		logger.info("getStudentInfoByClassId：" + sql);
 		ResultSet rs = db.query(sql);
 		ArrayList<StudentInfo> lst = new ArrayList<StudentInfo>();
-		
+
 		try {
 			if (rs != null) {
 				while (rs.next()) {
@@ -147,11 +146,12 @@ public class StudentDao {
 			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 		logger.info("数组长度为：" + lst.size());
 		return lst;
 	}
+
 	/**
 	 * 返回所有
 	 * 
@@ -184,15 +184,15 @@ public class StudentDao {
 		return lst;
 	}
 
-	
 	/**
 	 * 根据分页返回
 	 * 
 	 * @return
 	 */
-	public ArrayList<StudentInfo> getStudentsList(int pageIndex,int pageSize)
-	{		
-		String sql =  String.format("select students.*,userclass.name as 'classname',grade.chinese,grade.english,grade.maths from students left join userclass on(students.userclassid= userclass.Id) left join grade on(students.Id=grade.userid) where students.Id limit " + ((pageIndex - 1) * pageSize) + "," + pageSize);
+	public ArrayList<StudentInfo> getStudentsList(int pageIndex, int pageSize) {
+		String sql = String
+				.format("select students.*,userclass.name as 'classname',grade.chinese,grade.english,grade.maths from students left join userclass on(students.userclassid= userclass.Id) left join grade on(students.Id=grade.userid) where students.Id limit "
+						+ ((pageIndex - 1) * pageSize) + "," + pageSize);
 		ResultSet rs = db.query(sql);
 		ArrayList<StudentInfo> lst = new ArrayList<StudentInfo>();
 
@@ -220,5 +220,36 @@ public class StudentDao {
 		}
 		logger.info("数组长度为：" + lst.size());
 		return lst;
+	}
+
+	/**
+	 * @author Administrator
+	 */
+	public StudentInfo login(String name, String pwd) {
+		String sql = String.format(" select students.*,userclass.name as 'classname',grade.chinese,grade.english,grade.maths from students left join userclass on(students.userclassid= userclass.Id) left join grade on(students.Id=grade.userid)  where students.account = '%s' AND students.password = '%s' ", name, pwd);
+		ResultSet rs = db.query(sql);
+		StudentInfo info = new StudentInfo();
+		try {
+			if (rs != null) {
+				while (rs.next()) {
+
+					info.setId(rs.getInt("Id"));
+					info.setName(rs.getString("Name"));
+					info.setAccount(rs.getString("account"));
+					info.setPassword(rs.getString("password"));
+					info.setType(rs.getInt("type"));
+					info.setUserclassid(rs.getInt("userclassid"));
+					info.setCreatetime(rs.getDate("Createtime"));
+					info.setClassname(rs.getString("classname"));
+					info.setChinese(rs.getFloat("chinese"));
+					info.setEnglish(rs.getFloat("english"));
+					info.setMaths(rs.getFloat("maths"));
+				}
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return info;
 	}
 }

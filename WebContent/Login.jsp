@@ -1,24 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>名特学生信息管理系统</title>
-<link href="<%=basePath %>/Style/StudentStyle.css" rel="stylesheet" type="text/css" />
-<link href="<%=basePath %>/Script/jBox/Skins/Blue/jbox.css" rel="stylesheet"
+<link href="<%=basePath%>/Style/StudentStyle.css" rel="stylesheet"
 	type="text/css" />
-<link href="<%=basePath %>/Style/ks.css" rel="stylesheet" type="text/css" />
-<script src="<%=basePath %>/Script/jBox/jquery-1.4.2.min.js" type="text/javascript"></script>
-<script src="<%=basePath %>/Script/jBox/jquery.jBox-2.3.min.js" type="text/javascript"></script>
-<script src="<%=basePath %>/Script/jBox/i18n/jquery.jBox-zh-CN.js"
+<link href="<%=basePath%>/Script/jBox/Skins/Blue/jbox.css"
+	rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>/Style/ks.css" rel="stylesheet" type="text/css" />
+<script src="<%=basePath%>/Script/jBox/jquery-1.4.2.min.js"
 	type="text/javascript"></script>
-<script src="<%=basePath %>/Script/Common.js" type="text/javascript"></script>
-<script src="<%=basePath %>/Script/Data.js" type="text/javascript"></script>
+<script src="<%=basePath%>/Script/jBox/jquery.jBox-2.3.min.js"
+	type="text/javascript"></script>
+<script src="<%=basePath%>/Script/jBox/i18n/jquery.jBox-zh-CN.js"
+	type="text/javascript"></script>
+<script src="<%=basePath%>/Script/Common.js" type="text/javascript"></script>
+<script src="<%=basePath%>/Script/Data.js" type="text/javascript"></script>
 <base href="<%=basePath%>">
 <style type="text/css">
 <!--
@@ -37,7 +41,7 @@ body {
 }
 
 .banner {
-	background: url(images/login/bg.jpg) repeat-x;
+	background: url(Images/login/bg.jpg) repeat-x;
 	height: 106px;
 	margin-top: 50px;
 }
@@ -58,7 +62,7 @@ body {
 }
 
 .lbt {
-	background: url(images/login/loginbt.jpg) no-repeat;
+	background: url(Images/login/loginbt.jpg) no-repeat;
 	height: 33px;
 	width: 85px;
 	cursor: pointer;
@@ -73,7 +77,7 @@ body {
 	width: 260px;
 	font-size: 18px;
 	color: #bbb;
-	background: url(images/login/zh.jpg) no-repeat 0 0;
+	background: url(Images/login/zh.jpg) no-repeat 0 0;
 	padding-left: 50px;
 }
 
@@ -84,7 +88,7 @@ body {
 	padding: 4px 9px;
 	width: 260px;
 	font-size: 18px;
-	background: url(images/login/zh.jpg) no-repeat -1px -1px;
+	background: url(Images/login/zh.jpg) no-repeat -1px -1px;
 	padding-left: 50px;
 }
 
@@ -96,7 +100,7 @@ body {
 	width: 260px;
 	font-size: 18px;
 	color: #bbb;
-	background: url(images/login/mm.jpg) no-repeat 0 0;
+	background: url(Images/login/mm.jpg) no-repeat 0 0;
 	padding-left: 50px;
 }
 
@@ -107,7 +111,7 @@ body {
 	padding: 4px 9px;
 	width: 260px;
 	font-size: 18px;
-	background: url(images/login/mm.jpg) no-repeat -1px -1px;
+	background: url(Images/login/mm.jpg) no-repeat -1px -1px;
 	padding-left: 50px;
 }
 
@@ -124,9 +128,25 @@ body {
 }
 -->
 </style>
+
+<script type="text/javascript">
+	function loginClick() {
+		var name = $("#loginName").val();
+		var pwd = $("#loginPwd").val();
+		if (name.length <= 0) {
+			jBox.tip("请输入账号！");
+			return;
+		}
+		if (pwd.length <= 0) {
+			jBox.tip("请输入密码！");
+			return;
+		}
+		$("#frmlogin").submit();
+	}
+</script>
 </head>
 <body>
-<div class="banner">
+	<div class="banner">
 		<div class="width">
 			<img src="<%=basePath%>Images/login/logo.jpg" class="dl_logo" /><img
 				src="<%=basePath%>Images/login/title.jpg" width="326" height="35"
@@ -138,32 +158,42 @@ body {
 	</div>
 	<div class="denglubox">
 		<img src="<%=basePath%>Images/login/txt1.jpg" width="148" height="15" />
-		<div class="crm">
-			<input name="loginName" type="text" class="input_out" id="loginName"
-				onfocus="this.className='input_on'"
-				onblur="this.className='input_out'" />
+		<form id="frmlogin" action="Login">
+			<div class="crm">
+				<input name="loginName" type="text" class="input_out" id="loginName"
+					onfocus="this.className='input_on'"
+					onblur="this.className='input_out'" />
 
-		</div>
-		<div class="crm">
-			<input name="loginPwd" type="password" class="input_out2"
-				id="loginPwd" onfocus="this.className='input_on2'"
-				onblur="this.className='input_out2'" />
+			</div>
+			<div class="crm">
+				<input name="loginPwd" type="password" class="input_out2"
+					id="loginPwd" onfocus="this.className='input_on2'"
+					onblur="this.className='input_out2'" />
 
-		</div>
-		<div class="crm">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="74%"><input type="checkbox" name="checkbox"
-						id="checkbox" /> ��ס����&nbsp; &nbsp; <!--�������� --></td>
-					<td width="26%"><input type="submit" name="button" id="button"
-						value=" " class="lbt" onclick="loginClick()" /></td>
-				</tr>
-			</table>
-		</div>
+			</div>
+			<div class="crm">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="74%"></td>
+						<td width="26%"><input type="submit" name="button"
+							id="button" value=" " class="lbt" onclick="loginClick()" /></td>
+					</tr>
+				</table>
+			</div>
+		</form>
+		<%
+			if (request.getAttribute("message") != null) {
+		%>
+		<script type="text/javascript">
+			jBox.tip('<%out.write(request.getAttribute("message").toString());%>');
+		</script>
+		<%
+			}
+		%>
 	</div>
 	<div class="width" style="text-align: center; margin-top: 50px;">
-		<img src="<%=basePath%>Images/Login/mokuai.jpg" />
+		<img src="<%=basePath%>Images/login/mokuai.jpg" />
 	</div>
-	 <jsp:include page="Footer.jsp"></jsp:include>
+	<jsp:include page="Footer.jsp"></jsp:include>
 </body>
 </html>
