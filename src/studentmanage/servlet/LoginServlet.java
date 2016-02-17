@@ -18,43 +18,53 @@ import studentmanage.models.StudentInfo;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doPost(request,response);
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// doPost(request,response);
+		String loginout = request.getParameter("loginout");
+		if (loginout == null || loginout.isEmpty()) {
+			doPost(request, response);
+		} else {
+			HttpSession session = request.getSession(true);
+			session.invalidate();
+		}
+		// response.sendRedirect("Login.jsp");
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		String name = request.getParameter("loginName");
 		String pwd = request.getParameter("loginPwd");
 		StudentDao dao = new StudentDao();
-		StudentInfo info=dao.login(name, pwd);
-		if(info!=null && info.getId()>0)
-		{
-			HttpSession session = request.getSession(); 
+		StudentInfo info = dao.login(name, pwd);
+		if (info != null && info.getId() > 0) {
+			HttpSession session = request.getSession();
 			session.setAttribute("user", info);
 			response.sendRedirect("Index.jsp");
-		}
-		else{
+		} else {
 			request.setAttribute("message", "账号或密码不正确！");
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		}
-	 
+
 	}
 
 }

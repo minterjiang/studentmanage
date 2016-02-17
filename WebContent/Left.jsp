@@ -6,7 +6,7 @@
 	</div>
 	<div class="cdlist">
 		<div>
-			<a href="MyInfo/Index.aspx.html">我的信息</a>
+			<a href="Index.jsp">我的信息</a>
 		</div>
 	</div>
 	<div class="ta1">

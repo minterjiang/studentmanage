@@ -123,16 +123,17 @@
 				<h2 class="mbx">我的学习中心&nbsp;&nbsp;&nbsp;&nbsp;</h2>
 
 				<div class="dhbg">
-					<div class="dh1" style="margin: 0 27px 15px 0;">
+					<%-- <div class="dh1" style="margin: 0 27px 15px 0;">
 						<div class="dhwz">
 							<p>
-								您语文成绩 <span class="red"><c:out value="${info.chinese}"></c:out></span>分
+							
+								您语文成绩 <span class="red"><%= info.getChinese() %></span>分
 							</p>
 							<p>
-								您数学成绩 <span class="red"><c:out value="${info.english}"></c:out></span>分
+								您数学成绩 <span class="red"><%= info.getMaths() %></span>分
 							</p>
 							<p>
-								您英语成绩 <span class="red"><c:out value="${info.maths}"></c:out></span>分
+								您英语成绩 <span class="red"><%= info.getEnglish() %></span>分
 							</p>
 						</div>
 					</div>
@@ -156,31 +157,29 @@
 									height="25" /></a>
 							</div>
 						</div>
-					</div>
+					</div> --%>
 					<div class="dh3" style="margin: 0 27px 15px 0;">
 						<div class="dhwz">
-							<p>
-								<a
-									href="http://sm.zk0731.com/User/ExamCenter/ExamPractice/ListExam.aspx?ptid=1">模拟考试</a>
+						 <p>
+							
+							<span class="red"><%= info.getType()==1?"学生":"老师" %></span>&nbsp;&nbsp;<%= info.getName() %>
+							<% if(info.getType()==1){ %>
+							班级：<span class="red"><%=info.getClassname() %></span>
+							<%} %>
+							</p>
+							 <p>
+							
+								您语文成绩 <span class="red"><%= info.getChinese() %></span>分
 							</p>
 							<p>
-								<a
-									href="http://sm.zk0731.com/User/ExamCenter/ExamPractice/ListExercise.aspx?ptid=3">章节练习</a>
+								您数学成绩 <span class="red"><%= info.getMaths() %></span>分
 							</p>
 							<p>
-								<a
-									href="http://sm.zk0731.com/User/ExamCenter/ExamPractice/ListExercise.aspx?ptid=2">网上作业</a>
+								您英语成绩 <span class="red"><%= info.getEnglish() %></span>分
 							</p>
-							<div class="btright">
-								<a
-									href="http://sm.zk0731.com/User/ExamCenter/ExamPractice/ListExam.aspx?ptid=1">
-									<img src="Images/Student/default/bt_ks.jpg" alt="进入考试中心"
-									width="121" height="25" />
-								</a>
-							</div>
 						</div>
 					</div>
-					<div class="dh4">
+					<!-- <div class="dh4">
 						<div class="dhwz">
 							<p>
 								你应交<span class="blue">7800.00</span> 元，实缴 <span class="green">3700.00</span>元
@@ -198,7 +197,7 @@
 									height="25" /></a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 
